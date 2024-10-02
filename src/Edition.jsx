@@ -16,7 +16,7 @@ export default function Edition() {
   const [theme, setTheme] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   // const [isError, setIsError] = useState(false);
-  const isDebugMode = true;
+  const isDebugMode = false;
 
   useEffect(() => {
     setIsLoading(true);
