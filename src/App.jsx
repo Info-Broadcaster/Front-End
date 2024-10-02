@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import PageLayer from "./PageLayer";
 import { useState } from "react";
 import Button from "./components/Button";
+import { RiAiGenerate } from "react-icons/ri";
 
 function App() {
   const [link, setLink] = useState("");
@@ -39,16 +40,23 @@ function App() {
           <input
             type="text"
             placeholder="Votre lien ..."
-            className="border w-5/12 h-14 text-center"
+            className="border-b-2 w-5/12 h-14  focus:border-purple-700 focus:shadow-md focus:border-b-2 focus:outline-none"
             value={link}
             onChange={onLinkChange}
           />
-          <select name="langue" id="langue" onChange={onLanguageChange}>
+          <select
+            name="langue"
+            id="langue"
+            onChange={onLanguageChange}
+            className="focus:outline-none"
+          >
             <option value="fr">Français </option>
             <option value="en">Anglais</option>
           </select>
         </div>
-        <Button callback={() => generateArticle()}>Générer</Button>
+        <Button callback={() => generateArticle()}>
+          Générer <RiAiGenerate className="text-xl" />
+        </Button>
       </div>
     </PageLayer>
   );

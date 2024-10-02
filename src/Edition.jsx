@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import PageLayer from "./PageLayer";
 import InputLabel from "./components/InputLabel";
 import { useParams } from "react-router-dom";
-import axios from "axios";
 import TagList from "./components/TagList";
 import DisplayFlag from "./components/DisplayFlag";
 import AdvancedSpinner from "./components/AdvancedSpinner";
+import Button from "./components/Button";
+import { IoIosSend } from "react-icons/io";
+import axiosInstance from "../axiosInstance";
 
 export default function Edition() {
   const { link, lang } = useParams();
@@ -17,11 +19,10 @@ export default function Edition() {
   const isDebugMode = true;
 
   useEffect(() => {
-    console.log("la langue est ", lang);
     setIsLoading(true);
     if (!isDebugMode) {
-      axios
-        .post("http://localhost:443/api/dialoguewithllama/summarize", {
+      axiosInstance
+        .post("/dialoguewithllama/summarize", {
           url: decodeURIComponent(link),
           lang: lang,
         })
@@ -77,6 +78,15 @@ export default function Edition() {
               <label>Catégories</label>
             </span>
             <TagList tags={theme} />
+          </div>
+          <div className="flex justify-end">
+            <Button
+              callback={() => console.log("Fetch rainbow bubbles")}
+              isLoading={false}
+            >
+              Envoyer sur Rainbow
+              <IoIosSend className="text-2xl" />
+            </Button>
           </div>
         </div>
       )}

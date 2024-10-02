@@ -1,40 +1,38 @@
 import { useRef, useState } from "react";
 import Button from "./Button";
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
+import axiosInstance from "../../axiosInstance";
 
 export default function LogInForm() {
-  const username = useRef("");
-  const password = useRef("");
+  const credentials = useRef({
+    username: "",
+    password: "",
+  });
   const [errorMsg, setErrorMsg] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   function handleLogIn() {
     setErrorMsg("");
     setIsLoading(true);
-    if (username.current === "" || password.current === "") {
+    if (
+      credentials.current.username === "" ||
+      credentials.current.password === ""
+    ) {
       setErrorMsg("Veuillez remplir les champs");
       setIsLoading(false);
       return;
     }
 
-    const data = {
-      username: username.current,
-      password: password.current,
-    };
+    const data = credentials.current;
 
-    fetch("http://localhost:3000/api/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((response) => response.json())
+    axiosInstance
+      .post("/api/login", data)
       .then((data) => {
-        console.log("Success:", data);
-        if (data.success) {
-          alert("Connexion réussie");
-        } else {
-          alert("Nom d'utilisateur ou mot de passe incorrect");
+        if (data.status === 200) {
+          Cookies.set("token", data.data.token, { expires: 1, secure: true });
+          navigate("/");
         }
       })
       .catch((error) => {
@@ -56,7 +54,7 @@ export default function LogInForm() {
         className={`h-12 w-80 p-2 ${
           isLoading ? "cursor-not-allowed bg-gray-300" : "cursor-pointer"
         }`}
-        onChange={(e) => (username.current = e.target.value)}
+        onChange={(e) => (credentials.current.username = e.target.value)}
       />
       <input
         type="password"
@@ -64,7 +62,7 @@ export default function LogInForm() {
         className={`h-12 w-80 p-2 ${
           isLoading ? "cursor-not-allowed bg-gray-300" : "cursor-pointer"
         }`}
-        onChange={(e) => (password.current = e.target.value)}
+        onChange={(e) => (credentials.current.password = e.target.value)}
       />
       {errorMsg != "" && <span className="text-red-600">{errorMsg}</span>}
       <Button callback={handleLogIn} isLoading={isLoading}>
