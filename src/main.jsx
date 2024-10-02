@@ -5,19 +5,42 @@ import "./index.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Edition from "./Edition.jsx";
 import LogIn from "./LogIn.jsx";
+import ProtectedRoute from "./ProtectedRoute.jsx";
+import GuestRoute from "./GuestRoute.jsx";
+import LogOut from "./LogOut.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: (
+      <ProtectedRoute>
+        <App />,
+      </ProtectedRoute>
+    ),
   },
   {
     path: "/edition/:link/:lang?",
-    element: <Edition />,
+    element: (
+      <ProtectedRoute>
+        <Edition />
+      </ProtectedRoute>
+    ),
   },
   {
     path: "/connexion",
-    element: <LogIn />,
+    element: (
+      <GuestRoute>
+        <LogIn />
+      </GuestRoute>
+    ),
+  },
+  {
+    path: "/deconnexion",
+    element: (
+      <ProtectedRoute>
+        <LogOut />
+      </ProtectedRoute>
+    ),
   },
 ]);
 
