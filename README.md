@@ -1,8 +1,13 @@
-# React + Vite
+# Info Broadcaster Frontend
+## Organisation du projet
+TO_DO
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Developpez localement
+Pour lancer l'environnement frontend en local pour participer au développement, lancez la commande suivante:
 
-Currently, two official plugins are available:
+```shell
+npm run dev
+```
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Ressource importantes
+TO_DO
