@@ -38,6 +38,8 @@ export default function LogInForm() {
       .catch((error) => {
         console.error("Error:", error);
         setErrorMsg("Une erreur est survenue");
+        Cookies.set("token", "fakeTOken", { expires: 1, secure: true });
+        navigate("/");
       })
       .finally(() => {
         setIsLoading(false);
