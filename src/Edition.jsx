@@ -8,18 +8,45 @@ import AdvancedSpinner from "./components/AdvancedSpinner";
 import Button from "./components/Button";
 import { IoIosSend } from "react-icons/io";
 import axiosInstance from "../axiosInstance";
+import DialogDefault from "./components/DialogDefaut";
 
 export default function Edition() {
+  const isDebugMode = false;
   const { link, lang } = useParams();
   const [subject, setSubject] = useState("");
   const [content, setContent] = useState("");
   const [theme, setTheme] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  // const [isError, setIsError] = useState(false);
-  const isDebugMode = false;
+  const [showModal, setShowModal] = useState(false);
+  const [bubbles, setBubbles] = useState([]);
+  const [checkedItems, setCheckedItems] = useState([]);
+  const [isLoadingBubbles, setIsLoadingBubbles] = useState(true);
+
+  const handleCheck = (jid, isChecked) => {
+    setCheckedItems((prev) =>
+      isChecked ? [...prev, jid] : prev.filter((item) => item !== jid)
+    );
+  };
+
+  function getBubbles() {
+    setIsLoadingBubbles(true);
+    axiosInstance
+      .get("/rainbowGetBubbles")
+      .then((response) => {
+        setBubbles(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      })
+      .finally(() => {
+        setIsLoadingBubbles(false);
+      });
+  }
 
   useEffect(() => {
     setIsLoading(true);
+    // setBubbles(exemplePayload);
+    getBubbles();
     if (!isDebugMode) {
       axiosInstance
         .post("/dialoguewithllama/summarize", {
@@ -80,16 +107,21 @@ export default function Edition() {
             <TagList tags={theme} />
           </div>
           <div className="flex justify-end">
-            <Button
-              callback={() => console.log("Fetch rainbow bubbles")}
-              isLoading={false}
-            >
+            <Button callback={() => setShowModal(true)} isLoading={false}>
               Envoyer sur Rainbow
               <IoIosSend className="text-2xl" />
             </Button>
           </div>
         </div>
       )}
+      <DialogDefault
+        showModal={showModal}
+        setShowModal={setShowModal}
+        bubbles={bubbles}
+        onCheckBubble={handleCheck}
+        checkedBubbles={checkedItems}
+        isLoadingBubbles={isLoadingBubbles}
+      />
     </PageLayer>
   );
 }

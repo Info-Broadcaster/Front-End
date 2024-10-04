@@ -1,0 +1,44 @@
+[
+  {
+    "id": "66fdac78c9435b6cb1f4f417",
+    "name": "Info Broadcaster Test 1",
+    "topic": "Sport",
+    "jid": "room_bc2b4784a4054e87b5352c990a2d9b3e@muc.sandbox-all-in-one-rbx-prod-1.rainbow.sbg2",
+    "avatar": "https://sandbox.openrainbow.com:443/api/room-avatar/66fdac78c9435b6cb1f4f418?size=512&rand=dwUIShUDjM"
+  },
+  {
+    "id": "66fdac78c9435b6cb1f4f418",
+    "name": "Info Broadcaster Test 2",
+    "topic": "Sport",
+    "jid": "room_bc2b4784a4054e87b5352c990a2d9b3e@muc.sandbox-all-in-one-rbx-prod-1.rainbow.sbg3",
+    "avatar": "https://sandbox.openrainbow.com:443/api/room-avatar/66fdac78c9435b6cb1f4f418?size=512&rand=dwUIShUDjM"
+  },
+  {
+    "id": "66fdac78c9435b6cb1f4f419",
+    "name": "Info Broadcaster Test 3",
+    "topic": "Sport",
+    "jid": "room_bc2b4784a4054e87b5352c990a2d9b3e@muc.sandbox-all-in-one-rbx-prod-1.rainbow.sbg4",
+    "avatar": "https://sandbox.openrainbow.com:443/api/room-avatar/66fdac78c9435b6cb1f4f418?size=512&rand=dwUIShUDjM"
+  },
+  {
+    "id": "66fdac78c9435b6cb1f4f4",
+    "name": "Info Broadcaster Test 4",
+    "topic": "Sport",
+    "jid": "room_bc2b4784a4054e87b5352c990a2d9b3e@muc.sandbox-all-in-one-rbx-prod-1.rainbow.sbg5",
+    "avatar": "https://sandbox.openrainbow.com:443/api/room-avatar/66fdac78c9435b6cb1f4f418?size=512&rand=dwUIShUDjM"
+  },
+  {
+    "id": "66fdac78c9435b6cb1f4f41",
+    "name": "Info Broadcaster Test 5",
+    "topic": "Sport",
+    "jid": "room_bc2b4784a4054e87b5352c990a2d9b3e@muc.sandbox-all-in-one-rbx-prod-1.rainbow.sbg6",
+    "avatar": "https://sandbox.openrainbow.com:443/api/room-avatar/66fdac78c9435b6cb1f4f418?size=512&rand=dwUIShUDjM"
+  },
+  {
+    "id": "66fdac78c9435b6cb1f4f42",
+    "name": "Info Broadcaster Test 6",
+    "topic": "Sport",
+    "jid": "room_bc2b4784a4054e87b5352c990a2d9b3e@muc.sandbox-all-in-one-rbx-prod-1.rainbow.sbg7",
+    "avatar": "https://sandbox.openrainbow.com:443/api/room-avatar/66fdac78c9435b6cb1f4f418?size=512&rand=dwUIShUDjM"
+  }
+]
