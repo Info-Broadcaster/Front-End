@@ -1,7 +1,10 @@
 import axios from 'axios';
 
+const apiUrl = import.meta.env.VITE_BACKEND_URL;
+
+
 const axiosInstance = axios.create({
-  baseURL: 'https://infobroadcaster-backend.onrender.com/api', 
+  baseURL: apiUrl + "/api", 
   withCredentials: true, 
 });
 
