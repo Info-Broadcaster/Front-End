@@ -28,7 +28,7 @@ export default function LogInForm() {
     const data = credentials.current;
 
     axiosInstance
-      .post("/api/login", data)
+      .post("/login", data)
       .then((data) => {
         if (data.status === 200) {
           Cookies.set("token", data.data.token, { expires: 1, secure: true });
