@@ -37,9 +37,11 @@ export default function LogInForm() {
       })
       .catch((error) => {
         console.error("Error:", error);
-        setErrorMsg("Une erreur est survenue");
-        Cookies.set("token", "fakeTOken", { expires: 1, secure: true });
-        navigate("/");
+        if (error?.response?.status === 401) {
+          setErrorMsg("Nom d'utilisateur ou mot de passe incorrect");
+        } else {
+          setErrorMsg("Une erreur est survenue");
+        }
       })
       .finally(() => {
         setIsLoading(false);
