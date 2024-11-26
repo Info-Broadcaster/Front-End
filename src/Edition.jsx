@@ -11,7 +11,7 @@ import axiosInstance from "../axiosInstance";
 import DialogDefault from "./components/DialogDefaut";
 
 export default function Edition() {
-  const isDebugMode = false;
+  const isDebugMode = true;
   const { link, lang } = useParams();
   const [subject, setSubject] = useState("");
   const [content, setContent] = useState("");
@@ -41,6 +41,16 @@ export default function Edition() {
       .finally(() => {
         setIsLoadingBubbles(false);
       });
+  }
+
+  function sendMessageToRainbow() {
+    console.log("sendMessageToRainbow");
+    console.log(checkedItems);
+
+    axiosInstance.post("/rainbowSendMessageToBubbles", {
+      bubbles: checkedItems,
+      message: content,
+    });
   }
 
   useEffect(() => {
@@ -121,6 +131,7 @@ export default function Edition() {
         onCheckBubble={handleCheck}
         checkedBubbles={checkedItems}
         isLoadingBubbles={isLoadingBubbles}
+        sendMessageToRainbow={sendMessageToRainbow}
       />
     </PageLayer>
   );

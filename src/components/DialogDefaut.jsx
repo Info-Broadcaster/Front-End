@@ -10,12 +10,8 @@ const DialogDefault = ({
   onCheckBubble,
   checkedBubbles,
   isLoadingBubbles,
+  sendMessageToRainbow,
 }) => {
-  const getCheckedBubbles = () => {
-    console.log(checkedBubbles);
-    return checkedBubbles;
-  };
-
   return (
     <>
       {showModal ? (
@@ -59,7 +55,7 @@ const DialogDefault = ({
                     Fermer
                   </button>
                   <Button
-                    callback={() => getCheckedBubbles()}
+                    callback={() => sendMessageToRainbow()}
                     isLoading={false}
                   >
                     Envoyer sur Rainbow
