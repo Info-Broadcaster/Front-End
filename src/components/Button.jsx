@@ -5,14 +5,21 @@ export default function Button({
   callback,
   isLoading = false,
   color = "bg-purple-700",
+  type = "button",
+  disabled = false,
 }) {
+  const isButtonDisabled = isLoading || disabled;
+
   return (
     <button
-      className={`${color} w-60 h-14 rounded-md text-white hover:bg-purple-600 ${
-        isLoading ? "cursor-not-allowed" : "cursor-pointer"
+      className={`${color} w-60 h-14 rounded-md text-white ${
+        isButtonDisabled
+          ? "cursor-not-allowed opacity-50"
+          : "hover:bg-purple-600 cursor-pointer"
       }`}
-      onClick={callback}
-      disabled={isLoading}
+      onClick={!isButtonDisabled ? callback : undefined} // Prevents callback when disabled
+      disabled={isButtonDisabled}
+      type={type}
     >
       {isLoading ? (
         <div className="flex justify-center">

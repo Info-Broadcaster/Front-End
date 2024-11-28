@@ -40,7 +40,7 @@ function App() {
           <input
             type="text"
             placeholder="Votre lien ..."
-            className="border-b-2 w-5/12 h-14  focus:border-purple-700 focus:shadow-md focus:border-b-2 focus:outline-none"
+            className="border-b-2 w-5/12 h-14 bg-none focus:border-purple-700 focus:shadow-md focus:border-b-2 focus:outline-none px-3"
             value={link}
             onChange={onLinkChange}
           />
@@ -48,7 +48,7 @@ function App() {
             name="langue"
             id="langue"
             onChange={onLanguageChange}
-            className="focus:outline-none"
+            className="focus:outline-none bg-white"
           >
             <option value="fr">Français </option>
             <option value="en">Anglais</option>
