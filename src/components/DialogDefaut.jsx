@@ -65,9 +65,9 @@ const DialogDefault = ({
                     </span>
                   </button>
                 </div>
-                <div className="relative p-6 flex-auto overflow-y-scroll h-96">
+                <div className="relative p-6 flex-auto overflow-y-scroll h-96 ">
                   {isLoadingBubbles ? (
-                    <div className="flex justify-center items-center flex-col gap-4 ">
+                    <div className="flex justify-center items-center flex-col gap-4 h-full ">
                       <AdvancedSpinner />
                       <span>Chargement des bulles...</span>
                     </div>
@@ -85,7 +85,7 @@ const DialogDefault = ({
                       Une erreur est survenue
                     </span>
                   ) : null}
-                  <div className="flex">
+                  <div className="flex justify-end">
                     <button
                       className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1"
                       type="button"

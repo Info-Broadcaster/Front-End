@@ -6,8 +6,8 @@ import axiosInstance from "../../axiosInstance";
 
 export default function LogInForm() {
   const credentials = useRef({
-    username: "",
-    password: "",
+    username: import.meta.env.VITE_USERNAME || "",
+    password: import.meta.env.VITE_PASSWORD || "",
   });
   const [errorMsg, setErrorMsg] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -66,6 +66,7 @@ export default function LogInForm() {
           isLoading ? "cursor-not-allowed bg-gray-300" : "cursor-pointer"
         }`}
         onChange={(e) => (credentials.current.username = e.target.value)}
+        defaultValue={credentials.current.username}
         required
       />
 
@@ -78,6 +79,7 @@ export default function LogInForm() {
           isLoading ? "cursor-not-allowed bg-gray-300" : "cursor-pointer"
         }`}
         onChange={(e) => (credentials.current.password = e.target.value)}
+        defaultValue={credentials.current.password}
         required
       />
 
