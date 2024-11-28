@@ -21,8 +21,10 @@ export default function Edition() {
   const [bubbles, setBubbles] = useState([]);
   const [checkedItems, setCheckedItems] = useState([]);
   const [isLoadingBubbles, setIsLoadingBubbles] = useState(true);
+  const [isSent, setIsSent] = useState(false);
 
   const handleCheck = (jid, isChecked) => {
+    setIsSent(false);
     setCheckedItems((prev) =>
       isChecked ? [...prev, jid] : prev.filter((item) => item !== jid)
     );
@@ -41,16 +43,6 @@ export default function Edition() {
       .finally(() => {
         setIsLoadingBubbles(false);
       });
-  }
-
-  function sendMessageToRainbow() {
-    console.log("sendMessageToRainbow");
-    console.log(checkedItems);
-
-    axiosInstance.post("/rainbowSendMessageToBubbles", {
-      bubbles: checkedItems,
-      message: content,
-    });
   }
 
   useEffect(() => {
@@ -131,7 +123,9 @@ export default function Edition() {
         onCheckBubble={handleCheck}
         checkedBubbles={checkedItems}
         isLoadingBubbles={isLoadingBubbles}
-        sendMessageToRainbow={sendMessageToRainbow}
+        content={content}
+        isSent={isSent}
+        setIsSent={setIsSent}
       />
     </PageLayer>
   );
