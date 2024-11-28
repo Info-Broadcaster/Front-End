@@ -5,6 +5,7 @@ export default function Button({
   callback,
   isLoading = false,
   color = "bg-purple-700",
+  type = "button",
 }) {
   return (
     <button
@@ -13,6 +14,7 @@ export default function Button({
       }`}
       onClick={callback}
       disabled={isLoading}
+      type={type}
     >
       {isLoading ? (
         <div className="flex justify-center">
