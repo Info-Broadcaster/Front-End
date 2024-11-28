@@ -48,7 +48,7 @@ function App() {
             name="langue"
             id="langue"
             onChange={onLanguageChange}
-            className="focus:outline-none bg-none"
+            className="focus:outline-none bg-white"
           >
             <option value="fr">Français </option>
             <option value="en">Anglais</option>
