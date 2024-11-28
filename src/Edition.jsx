@@ -73,6 +73,7 @@ export default function Edition() {
           setIsLoading(false);
         });
     } else {
+      setSubject("Sujet test");
       setContent(`Retour vers le futur. Selon les informations de BFMTV, Patrick Balkany a récemment saisi la justice pour faire annuler la peine d’inéligibilité à laquelle il a été condamné, en 2019. Il souhaite pouvoir ainsi se présenter aux élections municipales de 2026 dans son fief de Levallois-Perret (Hauts-de-Seine).
 
 "Il s’agit d’une requête, déposée le 25 octobre, pour obtenir ce qu’on appelle le relèvement de sa peine complémentaire d’inéligibilité", confirme ainsi une source judiciaire.
