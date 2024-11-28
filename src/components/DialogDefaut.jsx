@@ -16,6 +16,8 @@ const DialogDefault = ({
   content,
   isSent,
   setIsSent,
+  title,
+  link,
 }) => {
   const [sendIsLoading, setSendIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
@@ -24,11 +26,14 @@ const DialogDefault = ({
     setSendIsLoading(true);
     setIsError(false);
     console.log(checkedBubbles);
+    console.log(content);
 
     axiosInstance
       .post("/rainbowSendMessageToBubbles", {
         bubbles: checkedBubbles,
         message: content,
+        title: title,
+        link: link,
       })
       .then((response) => {
         console.log(response);

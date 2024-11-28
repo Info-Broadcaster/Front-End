@@ -106,12 +106,12 @@ Transmise en octobre au Parquet national financier, sa requête n’a donc rien 
           <InputLabel label="Lien" value={link} disabled={true} />
           <InputLabel
             label="Titre de l'article"
-            setValue={(e) => setSubject(e.target.value)}
+            setValue={setSubject}
             value={subject}
           />
           <InputLabel
             label="Contenu"
-            setValue={(e) => setContent(e.target.value)}
+            setValue={setContent}
             value={content}
             textarea={true}
           />
@@ -139,6 +139,8 @@ Transmise en octobre au Parquet national financier, sa requête n’a donc rien 
         content={content}
         isSent={isSent}
         setIsSent={setIsSent}
+        link={link}
+        title={subject}
       />
     </PageLayer>
   );
