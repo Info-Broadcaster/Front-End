@@ -3,6 +3,7 @@ import Button from "./Button";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../axiosInstance";
+import { initializeSocket } from "../functions/websocket";
 
 export default function LogInForm() {
   const credentials = useRef({
@@ -30,9 +31,18 @@ export default function LogInForm() {
 
     axiosInstance
       .post("/login", data)
-      .then((data) => {
+      .then(async (data) => {
         if (data.status === 200) {
           Cookies.set("token", data.data.token, { expires: 1, secure: true });
+
+          try {
+            initializeSocket();
+            console.log("Connexion WebSocket réussie");
+          } catch (err) {
+            console.error("Erreur lors de la connexion WebSocket :", err);
+            setErrorMsg("Connexion WebSocket échouée");
+          }
+
           navigate("/");
         }
       })

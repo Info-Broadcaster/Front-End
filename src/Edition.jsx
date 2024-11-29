@@ -11,44 +11,16 @@ import axiosInstance from "../axiosInstance";
 import DialogDefault from "./components/DialogDefaut";
 
 export default function Edition() {
-  const isDebugMode = true;
+  const isDebugMode = import.meta.env.VITE_DEBUG_MODE === "true" ? true : false;
   const { link, lang } = useParams();
   const [subject, setSubject] = useState("");
   const [content, setContent] = useState("");
   const [theme, setTheme] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
-  const [bubbles, setBubbles] = useState([]);
-  const [checkedItems, setCheckedItems] = useState([]);
-  const [isLoadingBubbles, setIsLoadingBubbles] = useState(true);
-  const [isSent, setIsSent] = useState(false);
-
-  const handleCheck = (jid, isChecked) => {
-    setIsSent(false);
-    setCheckedItems((prev) =>
-      isChecked ? [...prev, jid] : prev.filter((item) => item !== jid)
-    );
-  };
-
-  function getBubbles() {
-    setIsLoadingBubbles(true);
-    axiosInstance
-      .get("/rainbowGetBubbles")
-      .then((response) => {
-        setBubbles(response.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      })
-      .finally(() => {
-        setIsLoadingBubbles(false);
-      });
-  }
 
   useEffect(() => {
     setIsLoading(true);
-    // setBubbles(exemplePayload);
-    getBubbles();
     if (!isDebugMode) {
       axiosInstance
         .post("/dialoguewithllama/summarize", {
@@ -61,7 +33,6 @@ export default function Edition() {
           setSubject(response.data.data.title);
           setTheme(response.data.data.themes);
           if (response.data.status === "error") {
-            // setIsError(true);
             console.error(response.data.message);
             return;
           }
@@ -133,13 +104,7 @@ Transmise en octobre au Parquet national financier, sa requête n’a donc rien 
       <DialogDefault
         showModal={showModal}
         setShowModal={setShowModal}
-        bubbles={bubbles}
-        onCheckBubble={handleCheck}
-        checkedBubbles={checkedItems}
-        isLoadingBubbles={isLoadingBubbles}
         content={content}
-        isSent={isSent}
-        setIsSent={setIsSent}
         link={link}
         title={subject}
       />

@@ -3,52 +3,53 @@ import { FaCheck } from "react-icons/fa6";
 import Button from "./Button";
 import AdvancedSpinner from "./AdvancedSpinner";
 import BubbleList from "./BubbleList";
-import axiosInstance from "../../axiosInstance";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getBubbles, sendMessageToBubbles } from "../functions/websocket";
 
-const DialogDefault = ({
-  showModal,
-  setShowModal,
-  bubbles,
-  onCheckBubble,
-  checkedBubbles,
-  isLoadingBubbles,
-  content,
-  isSent,
-  setIsSent,
-  title,
-  link,
-}) => {
+const DialogDefault = ({ showModal, setShowModal, content, title, link }) => {
   const [sendIsLoading, setSendIsLoading] = useState(false);
+  const [checkedItems, setCheckedItems] = useState([]);
   const [isError, setIsError] = useState(false);
+  const [isSent, setIsSent] = useState(false);
+  const [bubbles, setBubbles] = useState([]);
+  const [isLoadingBubbles, setIsLoadingBubbles] = useState(true);
+
+  useEffect(() => {
+    // Récupérer les bulles
+    setIsLoadingBubbles(true);
+    getBubbles((bubblesList) => {
+      console.log(bubblesList);
+      setBubbles(bubblesList);
+      setIsLoadingBubbles(false);
+    });
+
+    return () => {};
+  }, []);
 
   function sendMessageToRainbow() {
     setSendIsLoading(true);
     setIsError(false);
-    console.log(checkedBubbles);
+    console.log(checkedItems);
     console.log(content);
 
-    axiosInstance
-      .post("/rainbowSendMessageToBubbles", {
-        bubbles: checkedBubbles,
-        message: content,
-        title: title,
-        link: link,
-      })
-      .then((response) => {
-        console.log(response);
-        if (response.status === 200) {
-          setIsSent(true);
-        }
-      })
-      .catch((error) => {
-        console.error(error);
+    sendMessageToBubbles(checkedItems, content, title, link, (res) => {
+      console.log("Résultats de l'envoi :", res);
+      if (res === "OK") {
+        setIsSent(true);
+      } else {
         setIsError(true);
-      })
-      .finally(() => {
-        setSendIsLoading(false);
-      });
+      }
+    });
+
+    setSendIsLoading(false);
   }
+
+  const handleCheck = (jid, isChecked) => {
+    setIsSent(false);
+    setCheckedItems((prev) =>
+      isChecked ? [...prev, jid] : prev.filter((item) => item !== jid)
+    );
+  };
 
   return (
     <>
@@ -79,8 +80,8 @@ const DialogDefault = ({
                   ) : (
                     <BubbleList
                       bubbles={bubbles}
-                      onCheckBubble={onCheckBubble}
-                      checkedBubbles={checkedBubbles}
+                      onCheckBubble={handleCheck}
+                      checkedBubbles={checkedItems}
                     />
                   )}
                 </div>

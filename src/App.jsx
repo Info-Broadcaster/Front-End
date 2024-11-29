@@ -7,7 +7,12 @@ import Button from "./components/Button";
 import { RiAiGenerate } from "react-icons/ri";
 
 function App() {
-  const [link, setLink] = useState("");
+  const isDebugMode = import.meta.env.VITE_DEBUG_MODE === "true" ? true : false;
+  const [link, setLink] = useState(
+    isDebugMode
+      ? "https://www.bfmtv.com/paris/info-bfmtv-patrick-balkany-demande-l-annulation-de-sa-peine-d-ineligibilite-pour-se-representer-a-levallois-perret-en-2026_AN-202411280586.html"
+      : ""
+  );
   const [selectedLanguage, setSelectedLanguage] = useState("fr");
   const navigate = useNavigate();
   function generateArticle() {
@@ -50,7 +55,7 @@ function App() {
             onChange={onLanguageChange}
             className="focus:outline-none bg-white"
           >
-            <option value="fr">Français </option>
+            <option value="fr">Français</option>
             <option value="en">Anglais</option>
           </select>
         </div>
